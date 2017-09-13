@@ -3,6 +3,7 @@
 namespace Basemkhirat\Elasticsearch;
 
 use Elasticsearch\ClientBuilder;
+use Aws\ElasticsearchService\ElasticsearchPhpHandler;
 
 /**
  * Class Connection
@@ -59,6 +60,8 @@ class Connection
         $clientBuilder = ClientBuilder::create();
 
         $clientBuilder->setHosts($config["servers"]);
+        $handler = new ElasticsearchPhpHandler('us-east-1');
+        $clientBuilder->setHandler($handler);
 
         $query = new Query($clientBuilder->build());
 
@@ -96,6 +99,8 @@ class Connection
             $clientBuilder = ClientBuilder::create();
 
             $clientBuilder->setHosts($this->config["connections"][$name]["servers"]);
+            $handler = new ElasticsearchPhpHandler('us-east-1');
+            $clientBuilder->setHandler($handler);
 
             // Build the client object
             $connection = $clientBuilder->build();
