@@ -78,6 +78,7 @@ class Connection
     function connection($name)
     {
 
+        $handler = new ElasticsearchPhpHandler('us-east-1');
         // Check if connection is already loaded.
 
         if ($this->isLoaded($name)) {
@@ -96,6 +97,8 @@ class Connection
             $clientBuilder = ClientBuilder::create();
 
             $clientBuilder->setHosts($this->config["connections"][$name]["servers"]);
+            $clientBuilder->setHandler($handler);
+
 
             // Build the client object
             $connection = $clientBuilder->build();
