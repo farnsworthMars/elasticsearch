@@ -45,11 +45,17 @@ class CreateIndexCommand extends Command
     {
 
         $config = Config::get('es.connections.default.servers');
+        if(Config::get('es.location') == 'aws') {
+            $handler = new ElasticsearchPhpHandler('us-east-1');
+        } else {
+            $handler = false;
+        }
 
-        $client = ClientBuilder::create()
-            #->setHandler($handler)
-            ->setHosts([$config[0]['scheme'].'://'.$config[0]['host'].":".$config[0]['port']])
-            ->build();
+        $client = ClientBuilder::create()->setHosts([$config[0]['scheme'].'://'.$config[0]['host'].":".$config[0]['port']]);
+        if ($handler) {
+            $client->setHandler($handler);
+        }
+        $client->build();
 
 
 
