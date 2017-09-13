@@ -81,6 +81,7 @@ class Connection
     function connection($name)
     {
 
+
         // Check if connection is already loaded.
 
         if ($this->isLoaded($name)) {
