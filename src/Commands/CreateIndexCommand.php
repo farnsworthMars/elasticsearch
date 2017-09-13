@@ -1,8 +1,9 @@
 <?php
 
 namespace Basemkhirat\Elasticsearch\Commands;
-
+use Elasticsearch\ClientBuilder;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Config;
 
 class CreateIndexCommand extends Command
 {
@@ -43,9 +44,14 @@ class CreateIndexCommand extends Command
     public function handle()
     {
 
-        $connection = $this->option("connection") ? $this->option("connection") : config("es.default");
+        $config = Config::get('es.connections.default.servers');
 
-        $client = $this->es->connection($connection)->raw();
+        $client = ClientBuilder::create()
+            #->setHandler($handler)
+            ->setHosts([$config[0]['scheme'].'://'.$config[0]['host'].":".$config[0]['port']])
+            ->build();
+
+
 
         $indices = !is_null($this->argument('index')) ?
             [$this->argument('index')] :
