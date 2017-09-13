@@ -2,6 +2,7 @@
 
 namespace Basemkhirat\Elasticsearch;
 use Illuminate\Support\Facades\Config;
+use Aws\ElasticsearchService\ElasticsearchPhpHandler;
 use Elasticsearch\ClientBuilder;
 
 /**
