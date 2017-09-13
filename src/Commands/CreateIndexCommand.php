@@ -3,6 +3,7 @@
 namespace Basemkhirat\Elasticsearch\Commands;
 use Elasticsearch\ClientBuilder;
 use Illuminate\Console\Command;
+use Aws\ElasticsearchService\ElasticsearchPhpHandler;
 use Illuminate\Support\Facades\Config;
 
 class CreateIndexCommand extends Command
