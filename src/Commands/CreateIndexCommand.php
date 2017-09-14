@@ -73,10 +73,10 @@ class CreateIndexCommand extends Command
                 continue;
             }
 
-            if ($client->indices()->exists(['index' => $index])) {
-                $this->warn("Index {$index} is already exists!");
-                continue;
-            }
+//            if ($client->indices()->exists(['index' => $index])) {
+//                $this->warn("Index {$index} is already exists!");
+//                continue;
+//            }
 
             // Create index with settings from config file
 
